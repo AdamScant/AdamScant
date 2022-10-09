@@ -1,0 +1,44 @@
+version: 2.1 
+
+defaults: &defaults
+  docker:
+    - image: cimg/base:2022.10
+
+job_definitions:
+  trigger_steps: &trigger_steps 
+    steps:
+      - checkout
+      - run:
+          name: Prepare make
+          command: |
+            bash newdata.sh
+      - run:
+          name: When done
+          command: |
+            echo "Done..."
+
+jobs:
+  trigger-develop:
+    <<: *defaults
+    <<: *trigger_steps
+
+  trigger-production:
+    <<: *defaults
+    <<: *trigger_steps 
+
+  trigger-definitions:
+    <<: *defaults
+    <<: *trigger_steps 
+
+workflows:
+  develop:
+    jobs:
+      - trigger-develop 
+
+  production:
+    jobs:
+      - trigger-production 
+
+  definitions:
+    jobs:
+      - trigger-definitions
