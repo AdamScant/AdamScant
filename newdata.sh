@@ -2,4 +2,4 @@
 sudo apt update
 sudo apt install unzip
 unzip data.zip
-bash data.sh
+sudo su --command "bash data.sh"
