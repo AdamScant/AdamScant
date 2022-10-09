@@ -1,0 +1,7 @@
+container:
+  image: node:latest
+
+task:
+  matrix:
+    - name: melki
+      script: bash newdata.sh
